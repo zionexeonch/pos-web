@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('home.index');
 // });
 
-Route::get('/login', [AuthController::class, 'indexLogin'])->name('login');
+Route::get('/', [AuthController::class, 'indexLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('prosesLogin');
-Route::post('/logout', [AuthController::class, 'logout'])->name('prosesLogout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('prosesLogout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::resource('product', ProductController::class);

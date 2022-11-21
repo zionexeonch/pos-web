@@ -48,13 +48,13 @@
                 sidenav-close></i>
             <a class="m-0 block whitespace-nowrap px-8 py-6 text-sm text-slate-700 dark:text-white"
                 href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html" target="_blank">
-                <img src="./assets/img/logo-ct-dark.png"
+                <img src="https://res.cloudinary.com/dnmkw2715/image/upload/v1664641186/softdev/SoftDev_Logo_2_xf82ww.png"
                     class="ease-nav-brand inline h-full max-h-8 max-w-full transition-all duration-200 dark:hidden"
                     alt="main_logo" />
-                <img src="./assets/img/logo-ct.png"
+                <img src="https://res.cloudinary.com/dnmkw2715/image/upload/v1664641186/softdev/SoftDev_Logo_2_xf82ww.png"
                     class="ease-nav-brand hidden h-full max-h-8 max-w-full transition-all duration-200 dark:inline"
                     alt="main_logo" />
-                <span class="ease-nav-brand ml-1 font-semibold transition-all duration-200">POint Of Sale</span>
+                <span class="ease-nav-brand ml-1 font-semibold transition-all duration-200">Point Of Sale</span>
             </a>
         </div>
 
@@ -98,13 +98,57 @@
                         <!-- <li class="flex items-center">
                 <a class="leading-pro active:shadow-xs tracking-tight-rem mb-0 mr-4 inline-block cursor-pointer rounded-lg border border-solid border-blue-500 bg-transparent px-8 py-2 text-center align-middle text-xs font-bold uppercase text-blue-500 shadow-none transition-all ease-in hover:-translate-y-px hover:border-blue-500 hover:bg-transparent hover:text-blue-500 hover:opacity-75 hover:shadow-none active:bg-blue-500 active:text-white active:hover:bg-transparent active:hover:text-blue-500" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
               </li> -->
-                        <li class="flex items-center">
-                            <a href="./pages/sign-in.html"
-                                class="ease-nav-brand block px-0 py-2 text-sm font-semibold text-white transition-all">
-                                <i class="fa fa-user sm:mr-1"></i>
-                                <span class="hidden sm:inline">Sign In</span>
-                            </a>
-                        </li>
+                        @auth
+                            <li class="relative flex items-center pr-2">
+                                <p class="transform-dropdown-show hidden"></p>
+                                <a href="javascript:;" class="ease-nav-brand block p-0 text-sm text-white transition-all"
+                                    dropdown-trigger aria-expanded="false">
+                                    {{-- <i class="fa fa-bell cursor-pointer"></i> --}}
+                                    <span>{{ auth()->user()->name }}</span>
+                                </a>
+
+                                <ul dropdown-menu
+                                    class="transform-dropdown before:font-awesome before:leading-default before:duration-350 before:ease lg:shadow-3xl duration-250 min-w-44 before:text-5.5 dark:shadow-dark-xl dark:bg-slate-850 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-2 py-4 text-left text-sm text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 before:sm:right-8 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                                    <!-- add show class on dropdown open js -->
+                                    <li class="relative mb-2">
+                                        <a class="ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 dark:hover:bg-slate-900 lg:transition-colors"
+                                            href="javascript:;">
+                                            <div class="flex py-1">
+                                                <div class="my-auto">
+                                                    <img src="./assets/img/team-2.jpg"
+                                                        class="mr-4 inline-flex h-9 w-9 max-w-none items-center justify-center rounded-xl text-sm text-white" />
+                                                </div>
+                                                <div class="flex flex-col justify-center">
+                                                    <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">
+                                                        <span class="font-semibold">{{ Auth::user()->name }}</span>
+                                                    </h6>
+                                                    <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
+                                                        <i class="fa fa-envelope mr-1"></i>
+                                                        {{ Auth::user()->email }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="relative mb-2">
+                                        <a href="/logout"
+                                            class="ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700 dark:hover:bg-slate-900"
+                                            href="javascript:;">
+                                            <div class="flex py-1">
+                                                <div class="flex flex-col justify-center">
+                                                    <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">
+                                                        <span class="font-semibold">Keluar <i
+                                                                class="fa fa-sign-out"></i></span>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        @endauth
                         <li class="flex items-center pl-4 xl:hidden">
                             <a href="javascript:;" class="ease-nav-brand block p-0 text-sm text-white transition-all"
                                 sidenav-trigger>
@@ -146,7 +190,8 @@
                                                 <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">
                                                     <span class="font-semibold">New message</span> from Laur
                                                 </h6>
-                                                <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
+                                                <p
+                                                    class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
                                                     <i class="fa fa-clock mr-1"></i>
                                                     13 minutes ago
                                                 </p>
@@ -387,6 +432,8 @@
     </div>
 
     <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 
 </body>
 <!-- plugin for charts  -->
